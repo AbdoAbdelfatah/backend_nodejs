@@ -1,10 +1,15 @@
 import express from 'express'
-const app=express();
+import DB_connection from './DB/connection.js';
+import userRouter from './src/Modules/Users/users.router.js'; 
 const PORT =3000;
+const app=express();
 
-app.get('/',(req,res)=>{
-    res.send('<h1>Hello from Get</h1>')
-})
+DB_connection;
+app.use(express.json());
+
+
+app.use('/user',userRouter);
+ 
 app.listen(PORT,()=>{
     console.log(`server connected in port ${PORT}`)
 })
