@@ -40,3 +40,43 @@ export const getUserByEmail=(req,res,next)=>{
     }
     )
 }
+
+export const updateUser = async(req,res)=>{
+      
+     const Email=req.query.email;
+     console.log(Email);
+     
+     const user = await axios.get(`http://localhost:3000/user/getUser?email=${Email}`);
+     if(!user.data){
+        return res.json({Message:"user not found!"});
+     }
+      
+     
+     const allProp=['name','pass','email','gender','address'];
+     const updated={};
+
+     allProp.forEach(el=>{
+        if(req.body[el]!=undefined){
+              updated[el]=req.body[el];
+        }
+     });
+     const fields= Object.keys(updated).map(el=>`${el}=?`).join(', ');
+     const values=Object.values(updated);
+     console.log(...values);
+     const updateQuery=`update users set ${fields} where email= '${Email}';`;
+     console.log(updateQuery);
+     console.log(...values ,Email);
+     db_connection.execute(updateQuery,[...values],(err,result)=>{
+        if(err){
+            return res.json({Error:err});
+        }
+        if(!result.affectedRows){
+            return res.json({message:"no rows are affected"});
+        }
+        res.json({message:"user ip to date"});
+     })
+
+     
+
+
+}
