@@ -1,6 +1,6 @@
 import {Sequelize} from 'sequelize'
 
-export const db_config=new Sequelize('OnlineShopping','Abdo','Abdo123',{
+export const db_config=new Sequelize('OnlineShopping','Abdo','A123',{
     host:'localhost',
     dialect:'mysql'
 })

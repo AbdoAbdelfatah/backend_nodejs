@@ -1,5 +1,5 @@
 {
-  "name": "sql_with_nodejs_day5",
+  "name": "ORM_Squalize_day6",
   "version": "1.0.0",
   "main": "server.js",
   "type": "module",
@@ -10,11 +10,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "axios": "^1.12.2",
     "express": "^5.1.0",
     "mysql2": "^3.15.1",
     "sequelize": "^6.37.7"
-  }
+  },
+  "description": ""
 }
