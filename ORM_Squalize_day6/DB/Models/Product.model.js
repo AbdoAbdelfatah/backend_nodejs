@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import {db_config} from '../connection.js';
-import { User } from './User.model.js';
+import  User  from './User.model.js';
 
 
 

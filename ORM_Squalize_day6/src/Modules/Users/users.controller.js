@@ -1,4 +1,4 @@
-import { User } from "../../../DB/Models/User.model.js";
+import User from "../../../DB/Models/User.model.js";
 
 
 
@@ -7,15 +7,42 @@ import { User } from "../../../DB/Models/User.model.js";
  * bulkCreate
  * findOrCreate
  */
-export const addUser=async(req,res,next)=>{
+export const signUp=async(req,res,next)=>{
     try{
-        const {name,email,pass,gender}=req.body;
-        const newUser=await User.create({name,email,pass,gender});
-        res.json({"Message: ":"user added successfully",newUser});
+        const {name,email,password,gender}=req.body;
+
+        const userExist=await User.findOne({where:{email}});
+        if(userExist){
+          return res.status(400).json({Message:"user already exists"});
+        }
+
+        const newUser=await User.create({name,email,password,gender});
+        res.status(201).json({"Message: ":"user created successfully",newUser});
     }
     catch(err){
          res.status(500).json({ message: err.message });
     }
+}
+
+export const login=async(req,res,next)=>{
+  try{
+       const {email , password}=req.body;
+       // use scope(null) to include password if defaultScope excludes it
+       const userExist=await User.scope(null).findOne({where:{email}});
+       if(!userExist){
+         return res.status(400).json({Message:"Invalid cradintials"});
+        }
+        
+        const valid = await userExist.checkPassword(password);
+        
+        if (!valid) return res.status(401).json({ message: 'Invalid password' });
+         res.json({ message: 'Login successful' });
+      }
+      catch(err){
+        res.json({message:err});
+      }
+
+
 }
 
 /**

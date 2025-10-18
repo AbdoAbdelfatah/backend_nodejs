@@ -1,7 +1,7 @@
 import {Sequelize} from 'sequelize'
 
-export const db_config=new Sequelize('OnlineShopping','Abdo','A123',{
-    host:'localhost',
+export const db_config=new Sequelize('bovpkjfmboxkotbgtr1a','uzu9x5mfahnwmihd','Ke3rbv0qohScHORtqh55',{
+    host:'bovpkjfmboxkotbgtr1a-mysql.services.clever-cloud.com',
     dialect:'mysql'
 })
 
